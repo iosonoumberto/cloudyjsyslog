@@ -1,0 +1,11 @@
+---
+
+dash_title: "JLOGS DASH"
+logs_tag: "jsyslog"
+panel_title: "PANEL 1"
+dash_uid:  "dw2aBcqqz"
+datasource_name: "JNPRLOGS"
+db_name: "jlogs"
+db_user: "admin"
+db_password: "admin"
+working_path: "/root/autojlog"
