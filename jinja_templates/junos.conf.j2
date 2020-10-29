@@ -1,0 +1,5 @@
+set system syslog host {{ log_server }} any any
+set system syslog host {{ log_server }} port 6514
+set system syslog host {{ log_server }} source-address {{ src_log }}
+set system syslog host {{ log_server }} structured-data
+
