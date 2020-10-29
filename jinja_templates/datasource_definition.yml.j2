@@ -1,0 +1,25 @@
+apiVersion: 1
+
+datasources:
+- name: {{ datasource_name }}
+  type: influxdb
+  access: proxy
+  url: http://influxdb:8086
+  user: {{ db_user }}
+  database: {{ db_name }}
+  basicAuth: false
+  basicAuthUser:
+  basicAuthPassword:
+  withCredentials:
+  isDefault: true
+  jsonData:
+     tlsAuth: false
+     tlsAuthWithCACert: false
+  secureJsonData:
+    tlsCACert: ""
+    tlsClientCert: ""
+    tlsClientKey: ""
+    password: {{ db_password }}
+  version: 1
+  editable: true
+

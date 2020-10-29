@@ -1,0 +1,4 @@
+FROM fluent/fluentd:stable
+RUN ["gem", "install", "fluent-plugin-influxdb", "--no-document"]
+RUN ["gem", "install", "fluent-plugin-elasticsearch", "--no-rdoc", "--no-ri", "--version", "1.9.2"]
+

@@ -1,0 +1,39 @@
+version: "3.7"
+services:
+  fluentd:
+    build: ./fluentd
+    container_name: fluentd
+    ports:
+      - "6514:6514/udp"
+    links:
+      - "influxdb"
+    volumes:
+      - /root/fluent.conf:/fluentd/etc/fluent.conf
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    depends_on:
+      - influxdb
+    user: "0"
+    ports:
+      - "3000:3000"
+    volumes:
+      - /root/grafana_data:/var/lib/grafana
+      - ./grafana_prov:/etc/grafana/provisioning
+
+  influxdb:
+    image: influxdb:1.8
+    container_name: influxdb
+    environment:
+      INFLUXDB_DB: {{ db_name }}
+      INFLUXDB_ADMIN_USER: {{ db_user }}
+      INFLUXDB_ADMIN_PASSWORD: {{ db_password }}
+      INFLUXDB_HTTP_AUTH_ENABLED: "true"
+    ports:
+      - "8083:8083"
+      - "8086:8086"
+      - "8090:8090"
+    volumes:
+      - /root/influxdb_data:/var/lib/influxdb
+

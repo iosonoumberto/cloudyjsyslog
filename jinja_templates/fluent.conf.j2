@@ -1,0 +1,23 @@
+<source>
+    @type syslog
+    port 6514
+    source_address_key src_ip
+    facility_key facility
+    priority_key severity
+    <parse>
+        message_format rfc5424
+    </parse>
+    tag {{ logs_tag }}
+</source>
+
+<match {{ logs_tag }}.**>
+    @type influxdb
+    host influxdb
+    port 8086
+    dbname {{ db_name }}
+    user {{ db_user }}
+    password {{ db_password }}
+    flush_interval 600s
+    use_ssl false
+</match>
+
