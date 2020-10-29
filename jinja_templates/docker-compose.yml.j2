@@ -1,14 +1,14 @@
 version: "3.7"
 services:
   fluentd:
-    build: ./fluentd
+    build: {{ working_path }}/fluentd
     container_name: fluentd
     ports:
       - "6514:6514/udp"
     links:
       - "influxdb"
     volumes:
-      - /root/fluent.conf:/fluentd/etc/fluent.conf
+      - {{ working_path }}/fluent.conf:/fluentd/etc/fluent.conf
 
   grafana:
     image: grafana/grafana:latest
@@ -19,8 +19,8 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - /root/grafana_data:/var/lib/grafana
-      - ./grafana_prov:/etc/grafana/provisioning
+      - {{ working_path }}/grafana_data:/var/lib/grafana
+      - {{ working_path }}/grafana_prov:/etc/grafana/provisioning
 
   influxdb:
     image: influxdb:1.8
@@ -35,5 +35,5 @@ services:
       - "8086:8086"
       - "8090:8090"
     volumes:
-      - /root/influxdb_data:/var/lib/influxdb
+      - {{ working_path }}/influxdb_data:/var/lib/influxdb
 
